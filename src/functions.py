@@ -29,15 +29,10 @@ def cross_val_linear(X_train, y_train, k):
     kf = KFold(k)
     kf.get_n_splits(X_train)
 
-    # print(kf.split(X_train))
-
     train_dict = {}
     test_dict = {}
 
     for i, (train_index, test_index) in enumerate(kf.split(X_train)):
-        # print(f'Fold {i}:')
-        # print(f"Train: index={train_index}")
-        # print(f"Test: index={test_index}")
         
         X_train_kfold = X_train.iloc[train_index]
         y_train_kfold = y_train.iloc[train_index]
@@ -119,13 +114,9 @@ def normalize_data(data, target):
     X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.2)
 
     X_train_norm = pd.DataFrame([(lambda x: (x-X_train[i].min())/(X_train[i].max()-X_train[i].min()))(X_train[i]) for i in X_train.columns]).T
-    # X_train_norm
     y_train_norm = pd.DataFrame((lambda x: (x-y_train.min())/(y_train.max()-y_train.min()))(y_train))
-    # y_train_norm
     X_test_norm = pd.DataFrame([(lambda x: (x-X_test[i].min())/(X_test[i].max()-X_test[i].min()))(X_test[i]) for i in X_test.columns]).T
-    # X_test_norm
     y_test_norm = pd.DataFrame((lambda x: (x-y_test.min())/(y_test.max()-y_test.min()))(y_test))
-    # y_test_norm
 
     return X_train_norm, y_train_norm, X_test_norm, y_test_norm
 
