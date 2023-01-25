@@ -111,7 +111,7 @@ def cross_val_ridge(X_train, y_train, k, alpha=0.5, model=Ridge):
 
 def normalize_data(data, target):
 
-    X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.2)
+    X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.2, random_state=42)
 
     X_train_norm = pd.DataFrame([(lambda x: (x-X_train[i].min())/(X_train[i].max()-X_train[i].min()))(X_train[i]) for i in X_train.columns]).T
     y_train_norm = pd.DataFrame((lambda x: (x-y_train.min())/(y_train.max()-y_train.min()))(y_train))
